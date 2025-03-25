@@ -1,16 +1,8 @@
 from tkinter import *
-from tkinter import ttk
+from controller.controller import doSummrize
 
 class TextSummerizerView:
     def __init__(self, root) :
-      
-        #TODO
-        # add one input textbox make sure it is scrollable to user can enter message
-        # add one output box to show summer summurizerd text
-        # add one button for summarize action button
-        # add combobox to select between extrative/abstrative
-        # use place method to properly place ui
-        # use proper scale for each and every widgets
         
         #input frame
         inputFrame = LabelFrame(root, text=" Input Text ")
@@ -36,7 +28,7 @@ class TextSummerizerView:
         footerFrame.columnconfigure(2, weight=1)
         
         #warning label
-        warningLabel = Label(footerFrame, text="Warning: Summarization may take some time.", fg="red")
+        warningLabel = Label(footerFrame, text="", fg="red")
         warningLabel.grid(row=0, column=0, padx=10, pady=10, sticky='w')
 
         #dropdown
@@ -47,6 +39,11 @@ class TextSummerizerView:
         dropdown.grid(row=0, column=2, padx=10, pady=10, sticky='e')
 
         #summerize button
-        summarizeButton = Button(footerFrame, text="Summarize")
+        summarizeButton = Button(footerFrame, text="Summarize", 
+                                 command=lambda: doSummrize(text=inputText.get("1.0", END).strip(), 
+                                                            option=summarizationType.get(),
+                                                            warninglabel=warningLabel, outputText=outputText))
         summarizeButton.grid(row=0, column=3, padx=10, pady=10, sticky='e', ipadx=30)
+        
+    
 

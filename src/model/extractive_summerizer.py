@@ -1,8 +1,18 @@
 import nltk
 from nltk.tokenize import sent_tokenize, word_tokenize
 from nltk.corpus import stopwords
-nltk.download("punkt")
-nltk.download("stopwords")
+
+#download libraries
+def check_nltk_resource(resource_name):
+    try:
+        nltk.data.find(f"tokenizers/{resource_name}")  # For 'punkt'
+    except LookupError:
+        nltk.download(resource_name)
+
+check_nltk_resource("punkt")
+check_nltk_resource("stopwords")
+
+
 
 def extractive_summarization(text, num_sentences=5):
     """Performs extractive text summarization."""
